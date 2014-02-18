@@ -1,7 +1,7 @@
 Spawn-select
 ============
 
-Graphic spawn select for Dayz Taviana.  Works only for taviana.
+Graphic spawn select for Dayz Panthera.  Works only for Panthera.
 
 Place the files within your addons folder.
 
@@ -10,7 +10,7 @@ at the bottom of your init.sqf (after "#include "\z\addons\dayz_code\system\BIS_
 waitUntil {!isNil ("PVDZE_plr_LoginRecord")};
 if (dayzPlayerLogin2 select 2) then
 {
-    [] execVM "addons\DRNSpawn.sqf";
+    [] execVM "addons\execSpawn.sqf";
 };
 
 Next, at the bottom of your description.ext insert #include "addons\DRNdialogs.hpp"
