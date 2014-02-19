@@ -1,4 +1,4 @@
-
+private ["_position","_w","_isIsland","_pos","_findSpot","_isNear","_isZero","_counter","_SpAry","_ok","_SPP"];
 _SpAry = [[4444.03,4087.92,0],
 		[6821.11,983.155,0],
 		[7948.16,2263.27,0],
@@ -16,39 +16,40 @@ _SpAry = [[4444.03,4087.92,0],
 		[5486.38,3784.54,0],
 		[4720.98,2200.54,0],
 		[2810.14,3400.8,0]];
-SPS = -1;
+SPZ = 0;SPM=0;
 cutText ["","BLACK OUT"];
 _ok = createDialog "DRN_DIALOG";
-waitUntil { SPS == 1};
-if (!SPZ) then {SPZ = floor (random 16)};
+DRNSpawn = -1;
+waitUntil {DRNSpawn != -1};
+if (SPZ == 0) then {SPZ = ceil (random 16)};
 _SPP = _SpAry select SPZ;
-if (SPM) then
+hint str _SPP;
+if (SPM == 1) then
 	{
-		_position =[_SPP select 0,_SPP select 1,800];
-		player setPosATL _position;
-		player spawn BIS_fnc_halo;
-		player setvelocity [0,120*0.8,0];
-		player setdir 0;
+	_position =[_SPP select 0,_SPP select 1,800];
+	player setPosATL _position;
+	[player,1000] spawn BIS_fnc_halo;
+	player setvelocity [0,120*0.8,0];
+	player setdir 0;
 	} else {
-		_findSpot = true;
-		_mkr = "";
-		while {_findSpot} do {
-			_counter = 0;
-			while {_counter < 20 and _findSpot} do {
-				_position = ([(_SPP),0,2000,10,0,2000,1] call BIS_fnc_findSafePos);
-				_isNear = count (_position nearEntities ["Man",100]) == 0;
-				_isZero = ((_position select 0) == 0) and ((_position select 1) == 0);
-				//Island Check
-				_pos 		= _position;
-				_isIsland	= false;		//Can be set to true during the Check
-				for [{_w=0},{_w<=150},{_w=_w+2}] do {
-					_pos = [(_pos select 0),((_pos select 1) + _w),(_pos select 2)];
-					if(surfaceisWater _pos) exitWith {
-						_isIsland = true;
-					};
+	_findSpot = true;
+	while {_findSpot} do {
+		_counter = 0;
+		while {_counter < 20 and _findSpot} do {
+			_position = ([(_SPP),100,2000,10,0,2000,0] call BIS_fnc_findSafePos);
+			_isNear = count (_position nearEntities ["Man",100]) == 0;
+			_isZero = ((_position select 0) == 0) and ((_position select 1) == 0);
+			//Island Check
+			_pos 		= _position;
+			_isIsland	= false;		//Can be set to true during the Check
+			for [{_w=0},{_w<=150},{_w=_w+2}] do {
+				_pos = [(_pos select 0),((_pos select 1) + _w),(_pos select 2)];
+				if(surfaceisWater _pos) exitWith {
+					_isIsland = true;
 				};
-				if ((_isNear and !_isZero) || _isIsland) then {_findSpot = false};
-				_counter = _counter + 1;
+			};
+			if ((_isNear and !_isZero) || _isIsland) then {_findSpot = false};
+			_counter = _counter + 1;
 			};
 		};
 		_isZero = ((_position select 0) == 0) and ((_position select 1) == 0);

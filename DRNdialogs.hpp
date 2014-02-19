@@ -184,8 +184,14 @@ class DRN_DIALOG
 		colorDisabled[] = {0,0,0,0};
 		colorBackgroundDisabled[] = {0,0,0,0};
 		colorShadow[] = {0,0,0,0};
-		soundClick[] = {"\ca\ui\data\sound\onclick",0.07,1};
 		tooltip = "Spawn here";
+	};
+	class spbtn0: spbtn
+	{
+		idc = 1616;
+		x = 0.546494 * safezoneW + safezoneX;
+		y = 0.295 * safezoneH + safezoneY;
+		action = "1200 execVM 'addons\selectSpawn.sqf'";
 	};
 	class spbtn1: spbtn
 	{
@@ -299,13 +305,6 @@ class DRN_DIALOG
 		y = 0.573125 * safezoneH + safezoneY;
 		action = "1216 execVM 'addons\selectSpawn.sqf'";
 	};
-	class spbtn0: spbtn
-	{
-		idc = 1616;
-		x = 0.546494 * safezoneW + safezoneX;
-		y = 0.295 * safezoneH + safezoneY;
-		action = "1200 execVM 'addons\selectSpawn.sqf'";
-	};
 	class RscText_1000: RscText
 	{
 		idc = 1000;
@@ -336,7 +335,7 @@ class DRN_DIALOG
 		w = 0.0380025 * safezoneW;
 		h = 0.01825 * safezoneH;
 		colorBackground[] = {0.314,0.376,0.227,1};
-		action = "1 execVM 'addons\selectSpawn.sqf'";
+		action = "closeDialog 0;DRNSpawn = 1;";
 	};
 	};
 };
